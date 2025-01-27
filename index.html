@@ -1,17 +1,64 @@
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>スカーレットはバカ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>検索可能なオブジェクトリスト</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .search-box {
+      margin-bottom: 20px;
+    }
+    .item {
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-<p>勧誘しろカス</p>
-<p>猫を崇め奉れ</p>
-<form action="https://test-4dc.pages.dev" method="post">
-  <div>
-   <input type="search" name="search" placeholder="カード名を入力">
-   <button>検索</button>
-  </div>  
-</form>
-<p style="color:blue";>青い文字を書く</p>
+  <h1>検索可能なオブジェクトリスト</h1>
+  <input 
+    type="text" 
+    id="searchInput" 
+    class="search-box" 
+    placeholder="キーワードで検索...">
+
+  <div id="itemList">
+    <div class="item" data-tags="フルーツ 赤い 甘い">アップル</div>
+    <div class="item" data-tags="フルーツ 黄色い 甘い">バナナ</div>
+    <div class="item" data-tags="フルーツ 赤い 小さい">チェリー</div>
+    <div class="item" data-tags="フルーツ 茶色い 甘い">デーツ</div>
+    <div class="item" data-tags="フルーツ 紫色 酸っぱい">エルダーベリー</div>
+    <div class="item" data-tags="フルーツ 紫色 甘い">フィグ</div>
+    <div class="item" data-tags="フルーツ 紫色 酸っぱい">グレープ</div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const items = document.querySelectorAll('.item');
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const tags = item.getAttribute('data-tags').toLowerCase();
+        if (text.includes(query) || tags.includes(query)) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
