@@ -32,13 +32,12 @@
       border-radius: 5px;
       margin-right: 10px;
     }
-    /* 修正: span部分を小さくする */
     .item span {
-      font-size: 14px; /* 文字を小さく */
-      max-width: 100px; /* 横幅を制限 */
-      white-space: normal; /* 改行を許可 */
-      overflow: hidden; /* はみ出し防止 */
-      text-overflow: ellipsis; /* 省略記号（…）を表示（必要に応じて） */
+      font-size: 14px;
+      max-width: 100px;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .hidden {
       display: none;
@@ -53,35 +52,49 @@
     class="search-box" 
     placeholder="キーワードで検索...">
 
-  <div id="itemList">
-    <div class="item" data-tags="雷 ピカチュウ">
-      <img src="cardimg/SIK-094.png" alt="ピカチュウ">
-      <span>ピカチュウ</span>
-    </div>
-    <div class="item" data-tags="雷 ライチュウ">
-      <img src="cardimg/SIK-095.png" alt="ライチュウ">
-      <span>ライチュウ</span>
-    </div>
-    <div class="item" data-tags="雷 ピカチュウ ピカチュウex">
-      <img src="cardimg/SIK-096.png" alt="ピカチュウex">
-      <span>ピカチュウex</span>
-    </div>
-    <div class="item" data-tags="水 スターミー スターミーex">
-      <img src="cardimg/SIK-076.png" alt="スターミーex">
-      <span>スターミーex</span>
-    </div>
-    <div class="item" data-tags="水 カメックス カメックスex">
-      <img src="cardimg/SIK-056.png" alt="カメックスex">
-      <span>カメックスex</span>
-    </div>
-  </div>
+  <div id="itemList"></div> <!-- JavaScriptでアイテムを追加 -->
 
   <script>
-    const searchInput = document.getElementById('searchInput');
-    const items = document.querySelectorAll('.item');
+    // アイテムのデータを配列として定義
+    const itemsData = [
+      { img: "cardimg/SIK-056.png", name: "カメックスex", tags: "水 カメックス カメックスex" },
+      { img: "cardimg/SIK-076.png", name: "スターミーex", tags: "水 スターミー スターミーex" },
+      { img: "cardimg/SIK-094.png", name: "ピカチュウ", tags: "雷 ピカチュウ" },
+      { img: "cardimg/SIK-095.png", name: "ライチュウ", tags: "雷 ライチュウ" },
+      { img: "cardimg/SIK-096.png", name: "ピカチュウex", tags: "雷 ピカチュウ ピカチュウex" }
+    ];
 
+    // アイテムを動的に生成する関数
+    function generateItems() {
+      const itemList = document.getElementById("itemList");
+      itemList.innerHTML = ""; // 既存のアイテムをクリア
+
+      itemsData.forEach(item => {
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("item");
+        itemDiv.setAttribute("data-tags", item.tags);
+
+        const img = document.createElement("img");
+        img.src = item.img;
+        img.alt = item.name;
+
+        const span = document.createElement("span");
+        span.textContent = item.name;
+
+        itemDiv.appendChild(img);
+        itemDiv.appendChild(span);
+        itemList.appendChild(itemDiv);
+      });
+    }
+
+    // ページ読み込み時にアイテムを生成
+    window.onload = generateItems;
+
+    // 検索機能
+    const searchInput = document.getElementById('searchInput');
     searchInput.addEventListener('input', () => {
       const query = searchInput.value.toLowerCase();
+      const items = document.querySelectorAll('.item');
 
       items.forEach(item => {
         const text = item.textContent.toLowerCase();
