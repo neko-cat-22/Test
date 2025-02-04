@@ -12,7 +12,7 @@
     .search-box {
       margin-bottom: 20px;
     }
-    /* 変更: アイテムリストをグリッドレイアウトにする */
+    /* アイテムリストをグリッドレイアウトにする */
     #itemList {
       display: grid;
       grid-template-columns: repeat(3, 1fr); /* 3列 */
@@ -32,6 +32,14 @@
       border-radius: 5px;
       margin-right: 10px;
     }
+    /* 修正: span部分を小さくする */
+    .item span {
+      font-size: 14px; /* 文字を小さく */
+      max-width: 100px; /* 横幅を制限 */
+      white-space: normal; /* 改行を許可 */
+      overflow: hidden; /* はみ出し防止 */
+      text-overflow: ellipsis; /* 省略記号（…）を表示（必要に応じて） */
+    }
     .hidden {
       display: none;
     }
@@ -47,7 +55,7 @@
 
   <div id="itemList">
     <div class="item" data-tags="雷 ピカチュウ">
-      <img src="cardimg/SIK-094.png" alt=ピカチュウ>
+      <img src="cardimg/SIK-094.png" alt="ピカチュウ">
       <span>ピカチュウ</span>
     </div>
     <div class="item" data-tags="雷 ライチュウ">
