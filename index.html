@@ -10,19 +10,18 @@
       margin: 0;
       padding: 0;
       width: 100%;
-      overflow-x: hidden; /* 横スクロールを無くす */
+      overflow-x: hidden; /* 横スクロールを防ぐ */
     }
     .search-box {
       margin-bottom: 20px;
       width: 100%;
     }
-    /* アイテムリストをグリッドレイアウトにする */
     #itemList {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* 3列 */
-      gap: 10px; /* アイテム間の余白 */
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
       padding: 10px;
-      box-sizing: border-box; /* パディングが幅に含まれるように */
+      box-sizing: border-box;
     }
     .item {
       display: flex;
@@ -31,7 +30,7 @@
       border: 1px solid #ddd;
       border-radius: 5px;
       background-color: #f9f9f9;
-      box-sizing: border-box; /* パディングが幅に含まれるように */
+      box-sizing: border-box;
     }
     .item img {
       max-width: 70px;
@@ -49,17 +48,14 @@
     .hidden {
       display: none;
     }
-
-    /* レスポンシブ対応 */
     @media (max-width: 768px) {
       #itemList {
-        grid-template-columns: repeat(2, 1fr); /* 画面幅が小さい時は2列 */
+        grid-template-columns: repeat(2, 1fr);
       }
     }
-
     @media (max-width: 480px) {
       #itemList {
-        grid-template-columns: 1fr; /* 画面幅がさらに小さい時は1列 */
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -75,6 +71,8 @@
   <div id="itemList"></div> <!-- JavaScriptでアイテムを追加 -->
 
   <script>
+    console.log("ページが読み込まれました。");
+
     // アイテムのデータを配列として定義
     const itemsData = [
       { img: "cardimg/SIK-056.png", name: "カメックスex", tags: "水 カメックス カメックスex" },
@@ -86,10 +84,15 @@
 
     // アイテムを動的に生成する関数
     function generateItems() {
+      console.log("generateItems() が実行されました。");
+
       const itemList = document.getElementById("itemList");
       itemList.innerHTML = ""; // 既存のアイテムをクリア
+      console.log("itemList の中身をクリアしました。");
 
-      itemsData.forEach(item => {
+      itemsData.forEach((item, index) => {
+        console.log(`アイテム ${index + 1}: ${item.name} を生成します。`);
+
         const itemDiv = document.createElement("div");
         itemDiv.classList.add("item");
         itemDiv.setAttribute("data-tags", item.tags);
@@ -104,25 +107,37 @@
         itemDiv.appendChild(img);
         itemDiv.appendChild(span);
         itemList.appendChild(itemDiv);
+
+        console.log(`アイテム ${index + 1}: ${item.name} を itemList に追加しました。`);
       });
+
+      console.log("すべてのアイテムが追加されました。");
     }
 
     // ページ読み込み時にアイテムを生成
-    window.onload = generateItems;
+    window.onload = () => {
+      console.log("window.onload が実行されました。");
+      generateItems();
+    };
 
     // 検索機能
     const searchInput = document.getElementById('searchInput');
     searchInput.addEventListener('input', () => {
-      const query = searchInput.value.toLowerCase();
-      const items = document.querySelectorAll('.item');
+      console.log("検索ボックスの入力が変更されました。");
 
-      items.forEach(item => {
+      const query = searchInput.value.toLowerCase();
+      console.log(`検索クエリ: ${query}`);
+
+      const items = document.querySelectorAll('.item');
+      items.forEach((item, index) => {
         const text = item.textContent.toLowerCase();
         const tags = item.getAttribute('data-tags').toLowerCase();
         if (text.includes(query) || tags.includes(query)) {
           item.classList.remove('hidden');
+          console.log(`アイテム ${index + 1}: 表示`);
         } else {
           item.classList.add('hidden');
+          console.log(`アイテム ${index + 1}: 非表示`);
         }
       });
     });
