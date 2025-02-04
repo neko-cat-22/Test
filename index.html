@@ -7,16 +7,22 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden; /* 横スクロールを無くす */
     }
     .search-box {
       margin-bottom: 20px;
+      width: 100%;
     }
     /* アイテムリストをグリッドレイアウトにする */
     #itemList {
       display: grid;
       grid-template-columns: repeat(3, 1fr); /* 3列 */
       gap: 10px; /* アイテム間の余白 */
+      padding: 10px;
+      box-sizing: border-box; /* パディングが幅に含まれるように */
     }
     .item {
       display: flex;
@@ -25,6 +31,7 @@
       border: 1px solid #ddd;
       border-radius: 5px;
       background-color: #f9f9f9;
+      box-sizing: border-box; /* パディングが幅に含まれるように */
     }
     .item img {
       max-width: 70px;
@@ -41,6 +48,19 @@
     }
     .hidden {
       display: none;
+    }
+
+    /* レスポンシブ対応 */
+    @media (max-width: 768px) {
+      #itemList {
+        grid-template-columns: repeat(2, 1fr); /* 画面幅が小さい時は2列 */
+      }
+    }
+
+    @media (max-width: 480px) {
+      #itemList {
+        grid-template-columns: 1fr; /* 画面幅がさらに小さい時は1列 */
+      }
     }
   </style>
 </head>
