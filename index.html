@@ -12,11 +12,16 @@
     .search-box {
       margin-bottom: 20px;
     }
+    /* 変更: アイテムリストをグリッドレイアウトにする */
+    #itemList {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3列 */
+      gap: 10px; /* アイテム間の余白 */
+    }
     .item {
       display: flex;
       align-items: center;
       padding: 10px;
-      margin: 5px 0;
       border: 1px solid #ddd;
       border-radius: 5px;
       background-color: #f9f9f9;
@@ -57,7 +62,7 @@
       <img src="cardimg/SIK-076.png" alt="スターミーex">
       <span>スターミーex</span>
     </div>
-    <div class="item" data-tags="水　カメックス　カメックスex">
+    <div class="item" data-tags="水 カメックス カメックスex">
       <img src="cardimg/SIK-056.png" alt="カメックスex">
       <span>カメックスex</span>
     </div>
