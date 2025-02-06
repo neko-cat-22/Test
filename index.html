@@ -4,61 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>検索可能なオブジェクトリスト</title>
-  <style>
-body {
-  max-width: 900px;
-margin: 0 auto;
-padding: 20px;
-font-family: sans-serif;
-box-sizing: border-box; 
-}
-    .search-box {
-      margin-bottom: 20px;
-      width: 100%;
-    }
-    #itemList {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 10px;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-    .item {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      background-color: #f9f9f9;
-      box-sizing: border-box;
-    }
-    .item img {
-      max-width: 70px;
-      height: auto;
-      border-radius: 5px;
-      margin-right: 10px;
-    }
-    .item span {
-      font-size: 14px;
-      max-width: 100px;
-      white-space: normal;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .hidden {
-      display: none;
-    }
-    @media (max-width: 768px) {
-      #itemList {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (max-width: 480px) {
-      #itemList {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css"> <!-- 外部CSSファイルを読み込む -->
 </head>
 <body>
   <h1>検索可能なオブジェクトリスト</h1>
@@ -70,77 +16,6 @@ box-sizing: border-box;
 
   <div id="itemList"></div> <!-- JavaScriptでアイテムを追加 -->
 
-  <script>
-    console.log("ページが読み込まれました。");
-
-    // アイテムのデータを配列として定義
-    const itemsData = [
-      { img: "cardimg/SIK-056.png", name: "カメックスex", tags: "水 カメックス カメックスex" },
-      { img: "cardimg/SIK-076.png", name: "スターミーex", tags: "水 スターミー スターミーex" },
-      { img: "cardimg/SIK-094.png", name: "ピカチュウ", tags: "雷 ピカチュウ" },
-      { img: "cardimg/SIK-095.png", name: "ライチュウ", tags: "雷 ライチュウ" },
-      { img: "cardimg/SIK-096.png", name: "ピカチュウex", tags: "雷 ピカチュウ ピカチュウex" }
-    ];
-
-    // アイテムを動的に生成する関数
-    function generateItems() {
-      console.log("generateItems() が実行されました。");
-
-      const itemList = document.getElementById("itemList");
-      itemList.innerHTML = ""; // 既存のアイテムをクリア
-      console.log("itemList の中身をクリアしました。");
-
-      itemsData.forEach((item, index) => {
-        console.log(`アイテム ${index + 1}: ${item.name} を生成します。`);
-
-        const itemDiv = document.createElement("div");
-        itemDiv.classList.add("item");
-        itemDiv.setAttribute("data-tags", item.tags);
-
-        const img = document.createElement("img");
-        img.src = item.img;
-        img.alt = item.name;
-
-        const span = document.createElement("span");
-        span.textContent = item.name;
-
-        itemDiv.appendChild(img);
-        itemDiv.appendChild(span);
-        itemList.appendChild(itemDiv);
-
-        console.log(`アイテム ${index + 1}: ${item.name} を itemList に追加しました。`);
-      });
-
-      console.log("すべてのアイテムが追加されました。");
-    }
-
-    // ページ読み込み時にアイテムを生成
-    window.onload = () => {
-      console.log("window.onload が実行されました。");
-      generateItems();
-    };
-
-    // 検索機能
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('input', () => {
-      console.log("検索ボックスの入力が変更されました。");
-
-      const query = searchInput.value.toLowerCase();
-      console.log(`検索クエリ: ${query}`);
-
-      const items = document.querySelectorAll('.item');
-      items.forEach((item, index) => {
-        const text = item.textContent.toLowerCase();
-        const tags = item.getAttribute('data-tags').toLowerCase();
-        if (text.includes(query) || tags.includes(query)) {
-          item.classList.remove('hidden');
-          console.log(`アイテム ${index + 1}: 表示`);
-        } else {
-          item.classList.add('hidden');
-          console.log(`アイテム ${index + 1}: 非表示`);
-        }
-      });
-    });
-  </script>
+  <script src="script.js"></script> <!-- 外部JavaScriptファイルを読み込む -->
 </body>
 </html>
