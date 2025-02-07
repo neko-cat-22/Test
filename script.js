@@ -27,6 +27,9 @@ function generateItems() {
     const img = document.createElement("img");
     img.src = item.img;
     img.alt = item.name;
+    // 追加: 画像のサイズを設定
+    img.style.width = "100px";  // 適切な幅に調整
+    img.style.height = "auto";  // 高さを自動調整
 
     const span = document.createElement("span");
     span.textContent = item.name;
