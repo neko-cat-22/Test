@@ -98,6 +98,58 @@ function getRelatedItems(selectedItem) {
     return [0, 1, 2].map(level => uniqueRelated[level]).filter(Boolean);
 }
 
+// カード要素を生成する関数（オーバーレイ用サイズ適用）
+function createItemElement(item, isOverlay = false) {
+    const div = document.createElement("div");
+    div.classList.add("item");
+
+    const img = document.createElement("img");
+    img.src = item.image;
+    img.alt = item.name;
+
+    // 画像サイズの調整
+    if (isOverlay) {
+        img.classList.add("overlay-img"); // オーバーレイ用のサイズを適用
+    } else {
+        img.style.width = "70px";
+        img.style.height = "auto";
+    }
+
+    const name = document.createElement("p");
+    name.textContent = item.name;
+
+    div.appendChild(img);
+    div.appendChild(name);
+
+    return div;
+}
+
+// オーバーレイを開く関数の変更
+function openOverlay(selectedItem) {
+    const overlay = document.getElementById("overlay");
+    const overlaySelectedContainer = document.getElementById("overlay-selected-container");
+    const overlayRelatedContainer = document.getElementById("overlay-related-container");
+
+    overlaySelectedContainer.innerHTML = "";
+    overlayRelatedContainer.innerHTML = "";
+
+    // 選んだカード（大きく表示）
+    const selectedDiv = createItemElement(selectedItem, true);
+    selectedDiv.classList.add("selected");
+    overlaySelectedContainer.appendChild(selectedDiv);
+
+    // 関連カードの表示（少し大きく）
+    const relatedItems = getRelatedItems(selectedItem);
+    relatedItems.forEach(item => {
+        const div = createItemElement(item, true);
+        div.classList.add("related-item");
+        div.onclick = () => openOverlay(item);
+        overlayRelatedContainer.appendChild(div);
+    });
+
+    overlay.classList.remove("hidden");
+}
+
 // 閉じるボタンの処理
 document.getElementById("close-btn").addEventListener("click", function() {
     document.getElementById("overlay").classList.add("hidden");
