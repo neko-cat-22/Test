@@ -3,19 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>検索可能なオブジェクトリスト</title>
-  <link rel="stylesheet" href="styles.css"> <!-- 外部CSSファイルを読み込む -->
+  <title>カードリスト表示</title>
+  <!-- 外部CSSの読み込み -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>検索可能なオブジェクトリスト</h1>
-  <input 
-    type="text" 
-    id="searchInput" 
-    class="search-box" 
-    placeholder="キーワードで検索...">
+  <h1>カードリスト表示</h1>
 
-  <div id="itemList"></div> <!-- JavaScriptでアイテムを追加 -->
+  <!-- メイン画面のカード表示用コンテナ -->
+  <div id="item-container"></div>
 
-  <script src="script.js"></script> <!-- 外部JavaScriptファイルを読み込む -->
+  <!-- オーバーレイ（初期状態は非表示） -->
+  <div id="overlay" class="hidden">
+    <div class="overlay-content">
+      <!-- 閉じるボタン -->
+      <button id="close-btn">×</button>
+      <!-- 選んだカードを表示するコンテナ -->
+      <div id="overlay-selected-container"></div>
+      <!-- 進化系統カード（関連カード）を横並びで表示するコンテナ -->
+      <div id="overlay-related-container"></div>
+    </div>
+  </div>
+
+  <!-- 外部JavaScriptの読み込み -->
+  <script src="script.js"></script>
 </body>
 </html>
