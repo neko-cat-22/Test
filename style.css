@@ -93,13 +93,13 @@ body {
 
 /* 選んだカードの画像を大きくする */
 #overlay-selected-container img {
-    width: 200px; /* 画像を大きく */
+    width: 120px; /* 画像を大きく */
     height: auto;
 }
 
 /* 関連カードの画像も少し大きくする */
 #overlay-related-container img {
-    width: 120px;
+    width: 200px;
     height: auto;
 }
 
