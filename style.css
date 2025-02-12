@@ -91,6 +91,18 @@ body {
     gap: 10px;
 }
 
+/* 選んだカードの画像を大きくする */
+#overlay-selected-container img {
+    width: 200px; /* 画像を大きく */
+    height: auto;
+}
+
+/* 関連カードの画像も少し大きくする */
+#overlay-related-container img {
+    width: 120px;
+    height: auto;
+}
+
 /* 非表示用クラス */
 .hidden {
     display: none !important;
