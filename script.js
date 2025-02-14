@@ -1,5 +1,5 @@
 const itemsData = [
-    { id: 1, name: "フシギダネ", tags: ["evo_フシギダネ_0"], image: "cardimg/SIK-001.png" },
+    { id: 1, name: "フシギダネ", tags: ["evo_フシギダネ_0"], image: "cardimg/SIK-001.jpeg" },
     { id: 2, name: "フシギソウ", tags: ["evo_フシギダネ_1"], image: "cardimg/SIK-002.png" },
     { id: 3, name: "フシギバナ", tags: ["evo_フシギダネ_2"], image: "cardimg/SIK-003.png" },
     { id: 4, name: "フェニックス Lv.0", tags: ["evo_phoenix_0"], image: "img/phoenix0.jpg" },
