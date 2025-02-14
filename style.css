@@ -39,7 +39,6 @@ body {
 .item img {
     width: 200%;
     height: auto;
-    max-width: 120px; /* 最大サイズを制限 */
     margin-bottom: 10px;
     border-radius: 5px;
 }
