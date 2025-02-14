@@ -17,12 +17,12 @@ body {
 }
 
 /* スマホ対応：画面幅600px以下で2列、400px以下で1列 */
-@media (max-width: 60px) {
+@media (max-width: 600px) {
     #item-container {
         grid-template-columns: repeat(2, 1fr);
     }
 }
-@media (max-width: 40px) {
+@media (max-width: 400px) {
     #item-container {
         grid-template-columns: repeat(1, 1fr);
     }
@@ -30,15 +30,9 @@ body {
 
 /* カード（.item）のスタイル */
 .item {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 100%; /* 画像がはみ出ないようにする */
 }
 
 /* 画像サイズを親要素の幅に依存させる */
@@ -48,6 +42,11 @@ body {
     max-width: 120px; /* 最大サイズを制限 */
     margin-bottom: 10px;
     border-radius: 5px;
+}
+
+/* カード名を非表示 */
+.item p {
+    display: none;
 }
 
 /* オーバーレイ全体のスタイル */
@@ -109,4 +108,5 @@ body {
 /* 非表示用クラス */
 .hidden {
     display: none !important;
+}
 }
