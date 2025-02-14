@@ -37,7 +37,7 @@ body {
 
 /* 画像サイズを親要素の幅に依存させる */
 .item img {
-    width: 100%;
+    width: 200%;
     height: auto;
     max-width: 120px; /* 最大サイズを制限 */
     margin-bottom: 10px;
