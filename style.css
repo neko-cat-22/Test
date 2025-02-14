@@ -7,13 +7,25 @@ body {
     box-sizing: border-box;
 }
 
-/* メインのカード表示用コンテナ（グリッドレイアウト） */
+/* メインのカード表示用コンテナ（常に3列表示） */
 #item-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     padding: 10px;
     box-sizing: border-box;
+}
+
+/* スマホ対応：画面幅600px以下で2列、400px以下で1列 */
+@media (max-width: 600px) {
+    #item-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 400px) {
+    #item-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
 
 /* カード（.item）のスタイル */
@@ -26,19 +38,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 100%; /* 画像がはみ出ないようにする */
 }
 
+/* 画像サイズを親要素の幅に依存させる */
 .item img {
-    width: 70px;
+    width: 100%;
     height: auto;
+    max-width: 120px; /* 最大サイズを制限 */
     margin-bottom: 10px;
     border-radius: 5px;
-}
-
-.item p {
-    margin: 0;
-    text-align: center;
-    font-size: 14px;
 }
 
 /* オーバーレイ全体のスタイル */
@@ -84,17 +93,17 @@ body {
     gap: 10px;
 }
 
-/* 関連カードの画像を大きくする */
-#overlay-related-container img {
-    width: 200px;
-    height: auto;
-}
-
-/* 選択されたカード（強調表示） */
+/* 選択したカードを強調表示（赤枠） */
 .selected {
     border: 3px solid red;
     padding: 5px;
-    border-radius: 5px;
+}
+
+/* 進化系統カードの画像サイズ */
+#overlay-related-container img {
+    width: 100%;
+    max-width: 180px; /* 最大サイズを制限 */
+    height: auto;
 }
 
 /* 非表示用クラス */
