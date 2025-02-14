@@ -76,13 +76,6 @@ body {
     cursor: pointer;
 }
 
-/* 選んだカードを表示するコンテナ（上部） */
-#overlay-selected-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
 /* 進化系統カードを横並びに表示するコンテナ（下部） */
 #overlay-related-container {
     display: flex;
@@ -91,16 +84,17 @@ body {
     gap: 10px;
 }
 
-/* 選んだカードの画像を大きくする */
-#overlay-selected-container img {
-    width: 120px; /* 画像を大きく */
-    height: auto;
-}
-
-/* 関連カードの画像も少し大きくする */
+/* 関連カードの画像を大きくする */
 #overlay-related-container img {
     width: 200px;
     height: auto;
+}
+
+/* 選択されたカード（強調表示） */
+.selected {
+    border: 3px solid red;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 /* 非表示用クラス */
