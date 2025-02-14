@@ -16,18 +16,6 @@ body {
     box-sizing: border-box;
 }
 
-/* スマホ対応：画面幅600px以下で2列、400px以下で1列 */
-@media (max-width: 600px) {
-    #item-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-@media (max-width: 400px) {
-    #item-container {
-        grid-template-columns: repeat(1, 1fr);
-    }
-}
-
 /* カード（.item）のスタイル */
 .item {
     display: flex;
