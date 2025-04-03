@@ -32,7 +32,7 @@ function createItemElement(item, isSelected = false) {
     const img = document.createElement("img");
     img.src = item.image;
     img.alt = item.name;
-    img.style.width = "200px";
+    img.style.width = "180px";
     img.style.height = "auto";
 
     const name = document.createElement("p");
