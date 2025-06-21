@@ -8,14 +8,21 @@
 </head>
 <body>
   <h1>モンスター検索</h1>
+
   <div id="tag-search">
     <input type="text" id="tagInput" placeholder="タグを入力（カンマ区切り）" />
     <button onclick="searchByTags()">検索</button>
   </div>
+
+  <div id="tag-list-container">
+    <h3>タグ一覧</h3>
+    <div id="tag-list"></div>
+  </div>
+
   <div id="monster-list"></div>
 
-  <!-- データを先に読み込む -->
   <script src="monster_data.js"></script>
+  <script src="tag_list.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
