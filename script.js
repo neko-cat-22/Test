@@ -17,9 +17,20 @@ const monsters = [
   }
 ];
 
+const attributeColors = {
+  "炎": "#FF5050",
+  "水": "#38BCFF",
+  "木": "#55FF00",
+  "光": "#FFFF00",
+  "闇": "#AEFC00"
+};
+
 function createMonsterCard(monster) {
+  const attr = monster.属性.tags[0];
+  const borderColor = attributeColors[attr] || "#ccc";
+
   return `
-    <div class="monster-card">
+    <div class="monster-card" style="border: 4px solid ${borderColor}">
       <h3>${monster.name}</h3>
       <p><strong>属性:</strong> ${monster.属性.text} ${formatTags(monster.属性.tags)}</p>
       <p><strong>撃種:</strong> ${monster.撃種.text} ${formatTags(monster.撃種.tags)}</p>
