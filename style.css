@@ -1,99 +1,38 @@
-/* ベーススタイル */
 body {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: sans-serif;
-    box-sizing: border-box;
+  font-family: sans-serif;
+  padding: 20px;
+  background: #f7f7f7;
 }
 
-/* メインのカード表示用コンテナ（常に3列表示） */
-#item-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    padding: 10px;
-    box-sizing: border-box;
+#tag-search {
+  margin-bottom: 20px;
 }
 
-/* カード（.item）のスタイル */
-.item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#tagInput {
+  width: 300px;
+  padding: 8px;
+  font-size: 16px;
 }
 
-/* 画像サイズを親要素の幅に依存させる */
-.item img {
-    width: 200%;
-    height: auto;
-    margin-bottom: 10px;
-    border-radius: 5px;
+#monster-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-/* カード名を非表示 */
-.item p {
-    display: none;
+.monster-card {
+  background: white;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 300px;
 }
 
-/* オーバーレイ全体のスタイル */
-#overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-/* オーバーレイ内のコンテンツボックス */
-.overlay-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    position: relative;
-    max-width: 800px;
-    width: 90%;
-}
-
-/* 閉じるボタン（右上） */
-#close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: transparent;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* 進化系統カードを横並びに表示するコンテナ（下部） */
-#overlay-related-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-/* 選択したカードを強調表示（赤枠） */
-.selected {
-    border: 3px solid red;
-    padding: 5px;
-}
-
-/* 進化系統カードの画像サイズ */
-#overlay-related-container img {
-    width: 100%;
-    max-width: 180px; /* 最大サイズを制限 */
-    height: auto;
-}
-
-/* 非表示用クラス */
-.hidden {
-    display: none !important;
-}
+.tag {
+  display: inline-block;
+  background: #eee;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin: 2px;
+  font-size: 12px;
 }
