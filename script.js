@@ -52,11 +52,30 @@ function renderMonsters(list) {
     : "<p>該当するモンスターが見つかりませんでした。</p>";
 }
 
-// データロード後に表示
+// タグ一覧を描画してクリックイベントを追加
+function renderTagList() {
+  const tagList = document.getElementById("tag-list");
+  tagList.innerHTML = availableTags.map(tag =>
+    `<div class="clickable-tag" onclick="addTagToInput('${tag}')">${tag}</div>`
+  ).join("");
+}
+
+// タグクリックで検索ボックスに追加
+function addTagToInput(tag) {
+  const input = document.getElementById("tagInput");
+  const currentTags = input.value.split(",").map(t => t.trim()).filter(Boolean);
+
+  if (!currentTags.includes(tag)) {
+    currentTags.push(tag);
+    input.value = currentTags.join(", ");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof monsters !== "undefined") {
     renderMonsters(monsters);
-  } else {
-    console.error("モンスター情報が読み込まれていません。");
+  }
+  if (typeof availableTags !== "undefined") {
+    renderTagList();
   }
 });
