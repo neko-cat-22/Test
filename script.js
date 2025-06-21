@@ -1,22 +1,4 @@
-const monsters = [
-  {
-    name: "テストモンスター",
-    属性: { text: "炎", tags: ["炎"] },
-    撃種: { text: "反射", tags: ["反射"] },
-    ショットスキル: { text: "味方に触れると回復する", tags: ["回復", "ステータス"] },
-    アシストスキル: { text: "攻撃力アップ", tags: ["バフ"] },
-    アビリティ: { text: "アンチ重力バリア", tags: ["AGB"] }
-  },
-  {
-    name: "スピードドラゴン",
-    属性: { text: "水", tags: ["水"] },
-    撃種: { text: "貫通", tags: ["貫通"] },
-    ショットスキル: { text: "スピードアップ", tags: ["バフ"] },
-    アシストスキル: { text: "防御力ダウン", tags: ["デバフ"] },
-    アビリティ: { text: "アンチワープ", tags: ["AW"] }
-  }
-];
-
+// 属性ごとのボーダーカラー設定
 const attributeColors = {
   "炎": "#FF5050",
   "水": "#38BCFF",
@@ -70,5 +52,11 @@ function renderMonsters(list) {
     : "<p>該当するモンスターが見つかりませんでした。</p>";
 }
 
-// 初期表示
-renderMonsters(monsters);
+// データロード後に表示
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof monsters !== "undefined") {
+    renderMonsters(monsters);
+  } else {
+    console.error("モンスター情報が読み込まれていません。");
+  }
+});
