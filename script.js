@@ -14,11 +14,11 @@ function createMonsterCard(monster) {
   return `
     <div class="monster-card" style="border: 4px solid ${borderColor}">
       <h3>${monster.name}</h3>
-      <p><strong>属性:</strong> ${monster.属性.text} ${formatTags(monster.属性.tags)}</p>
-      <p><strong>撃種:</strong> ${monster.撃種.text} ${formatTags(monster.撃種.tags)}</p>
+      <p><strong>属性:</strong> ${monster.属性.text}</p>
+      <p><strong>撃種:</strong> ${monster.撃種.text}</p>
       <p><strong>ショットスキル:</strong> ${monster.ショットスキル.text} ${formatTags(monster.ショットスキル.tags)}</p>
       <p><strong>アシストスキル:</strong> ${monster.アシストスキル.text} ${formatTags(monster.アシストスキル.tags)}</p>
-      <p><strong>アビリティ:</strong> ${monster.アビリティ.text} ${formatTags(monster.アビリティ.tags)}</p>
+      <p><strong>アビリティ:</strong> ${monster.アビリティ.text}</p>
     </div>
   `;
 }
@@ -52,7 +52,6 @@ function renderMonsters(list) {
     : "<p>該当するモンスターが見つかりませんでした。</p>";
 }
 
-// タグ一覧を描画してクリックイベントを追加
 function renderTagList() {
   const tagList = document.getElementById("tag-list");
   tagList.innerHTML = availableTags.map(tag =>
@@ -60,7 +59,6 @@ function renderTagList() {
   ).join("");
 }
 
-// タグクリックで検索ボックスに追加
 function addTagToInput(tag) {
   const input = document.getElementById("tagInput");
   const currentTags = input.value.split(",").map(t => t.trim()).filter(Boolean);
