@@ -16,16 +16,14 @@ body {
 
 #monster-list {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 20px;
 }
 
 .monster-card {
   background: white;
   padding: 16px;
-  border: 1px solid #ccc;
   border-radius: 8px;
-  width: 300px;
 }
 
 .tag {
