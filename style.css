@@ -1,36 +1,24 @@
-body {
-  font-family: sans-serif;
-  padding: 20px;
-  background: #f7f7f7;
-}
-
-#tag-search {
+/* 追加分 */
+#tag-list-container {
   margin-bottom: 20px;
 }
 
-#tagInput {
-  width: 300px;
-  padding: 8px;
-  font-size: 16px;
-}
-
-#monster-list {
+#tag-list {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.monster-card {
-  background: white;
-  padding: 16px;
-  border-radius: 8px;
-}
-
-.tag {
-  display: inline-block;
-  background: #eee;
+#tag-list .clickable-tag {
+  background-color: #ddd;
+  padding: 6px 10px;
   border-radius: 4px;
-  padding: 2px 6px;
-  margin: 2px;
-  font-size: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+#tag-list .clickable-tag:hover {
+  background-color: #bbb;
 }
