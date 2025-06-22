@@ -52,11 +52,15 @@ function renderMonsters(list) {
     : "<p>該当するモンスターが見つかりませんでした。</p>";
 }
 
+// タググループを表示
 function renderTagList() {
   const tagList = document.getElementById("tag-list");
-  tagList.innerHTML = availableTags.map(tag =>
-    `<div class="clickable-tag" onclick="addTagToInput('${tag}')">${tag}</div>`
-  ).join("");
+  tagList.innerHTML = availableTagGroups.map(group => {
+    const groupHTML = group.map(tag =>
+      `<div class="clickable-tag" onclick="addTagToInput('${tag}')">${tag}</div>`
+    ).join("");
+    return `<div class="tag-group">${groupHTML}</div>`;
+  }).join("");
 }
 
 function addTagToInput(tag) {
@@ -73,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof monsters !== "undefined") {
     renderMonsters(monsters);
   }
-  if (typeof availableTags !== "undefined") {
+  if (typeof availableTagGroups !== "undefined") {
     renderTagList();
   }
 });
