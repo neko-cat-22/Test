@@ -42,11 +42,17 @@ body {
 
 #tag-list {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tag-group {
+  display: flex;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-#tag-list .clickable-tag {
+.clickable-tag {
   background-color: #ddd;
   padding: 6px 10px;
   border-radius: 4px;
@@ -56,6 +62,6 @@ body {
   transition: background-color 0.2s;
 }
 
-#tag-list .clickable-tag:hover {
+.clickable-tag:hover {
   background-color: #bbb;
 }
