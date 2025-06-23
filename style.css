@@ -43,10 +43,23 @@ body {
 #tag-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
 }
 
 .tag-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tag-group-title {
+  font-weight: bold;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+.tag-buttons {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
