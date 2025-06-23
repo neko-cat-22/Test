@@ -52,14 +52,15 @@ function renderMonsters(list) {
     : "<p>該当するモンスターが見つかりませんでした。</p>";
 }
 
-// タググループを表示
+// タグリストの系統名＋タグを表示
 function renderTagList() {
   const tagList = document.getElementById("tag-list");
   tagList.innerHTML = availableTagGroups.map(group => {
-    const groupHTML = group.map(tag =>
+    const titleHTML = `<div class="tag-group-title">${group.title}</div>`;
+    const tagButtons = group.tags.map(tag =>
       `<div class="clickable-tag" onclick="addTagToInput('${tag}')">${tag}</div>`
     ).join("");
-    return `<div class="tag-group">${groupHTML}</div>`;
+    return `<div class="tag-group">${titleHTML}<div class="tag-buttons">${tagButtons}</div></div>`;
   }).join("");
 }
 
