@@ -8,7 +8,10 @@ const availableTagGroups = [
     tags: ["反射", "貫通"]
   },
   {
-    title:"アビリティ",
-    tags: ["AGB","ADW","AW","MS","飛行"]
+    title: "アビリティ",
+    tags: [
+      "AGB", "ADW", "AW", "MS", "飛行", "AB", "AWD", "AM",
+      "アンチ減速壁", "アンチ転送壁", "アンチ減速床"
+    ]
   }
 ];
