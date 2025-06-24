@@ -11,5 +11,4 @@ const availableTagGroups = [
     title:"アビリティ",
     tags: ["AGB","ADW","AW","MS","飛行“]
   }
-  
 ];
