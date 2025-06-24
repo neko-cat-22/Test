@@ -6,5 +6,10 @@ const availableTagGroups = [
   {
     title: "撃種",
     tags: ["反射", "貫通"]
+  },
+  {
+    title:"アビリティ",
+    tags: ["AGB","ADW","AW","MS","飛行“]
   }
+  
 ];
