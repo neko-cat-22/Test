@@ -29,8 +29,13 @@ function formatTags(tags) {
 
 function searchByTags() {
   const input = document.getElementById("tagInput").value.trim();
-  const keywords = input.split(",").map(t => t.trim()).filter(Boolean);
 
+  if (!input) {
+    renderMonsters(monsters);
+    return;
+  }
+
+  const conditions = parseConditions(input);
   const filtered = monsters.filter(monster => {
     const allTags = [
       ...monster.属性.tags,
@@ -39,10 +44,44 @@ function searchByTags() {
       ...monster.アシストスキル.tags,
       ...monster.アビリティ.tags
     ];
-    return keywords.every(keyword => allTags.includes(keyword));
+    return matchConditions(allTags, conditions);
   });
 
   renderMonsters(filtered);
+}
+
+function parseConditions(input) {
+  // 括弧で囲まれた部分をグループとする
+  const orParts = input.split(/\s+or\s+/i);
+
+  const groups = orParts.map(part => {
+    const group = [];
+    const match = part.match(/\((.*?)\)/);
+    if (match) {
+      group.push(...match[1].split(",").map(t => t.trim()).filter(Boolean));
+    } else {
+      group.push(...part.split(",").map(t => t.trim()).filter(Boolean));
+    }
+    return group;
+  });
+
+  // AND条件として共通するタグを抽出
+  const rest = input.split(/\s+or\s+/i).join(",");
+  const restTags = rest.replace(/\([^)]*\)/g, "").split(",").map(t => t.trim()).filter(t => t && t.toLowerCase() !== "or");
+
+  return { orGroups: groups, andTags: restTags };
+}
+
+function matchConditions(tags, { orGroups, andTags }) {
+  // ORグループがあればどれか1グループが一致していればOK
+  const orValid = orGroups.length === 0 || orGroups.some(group =>
+    group.every(tag => tags.includes(tag))
+  );
+
+  // ANDタグはすべて含んでいること
+  const andValid = andTags.every(tag => tags.includes(tag));
+
+  return orValid && andValid;
 }
 
 function renderMonsters(list) {
@@ -52,7 +91,6 @@ function renderMonsters(list) {
     : "<p>該当するモンスターが見つかりませんでした。</p>";
 }
 
-// タグリストの系統名＋タグを表示
 function renderTagList() {
   const tagList = document.getElementById("tag-list");
   tagList.innerHTML = availableTagGroups.map(group => {
@@ -66,12 +104,12 @@ function renderTagList() {
 
 function addTagToInput(tag) {
   const input = document.getElementById("tagInput");
-  const currentTags = input.value.split(",").map(t => t.trim()).filter(Boolean);
-
-  if (!currentTags.includes(tag)) {
-    currentTags.push(tag);
-    input.value = currentTags.join(", ");
+  const currentTags = input.value.trim();
+  if (!currentTags) {
+    input.value = tag;
+    return;
   }
+  input.value = currentTags + ", " + tag;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
