@@ -29,7 +29,12 @@ function formatTags(tags) {
 
 function searchByTags() {
   const input = document.getElementById("tagInput").value.trim();
-  const keywords = input.split(",").map(t => t.trim()).filter(Boolean);
+  if (!input) {
+    renderMonsters(monsters);
+    return;
+  }
+
+  const { groups, orPairs } = parseInputToGroups(input);
 
   const filtered = monsters.filter(monster => {
     const allTags = [
@@ -39,10 +44,60 @@ function searchByTags() {
       ...monster.アシストスキル.tags,
       ...monster.アビリティ.tags
     ];
-    return keywords.every(keyword => allTags.includes(keyword));
+    return matchConditions(allTags, groups, orPairs);
   });
 
   renderMonsters(filtered);
+}
+
+function parseInputToGroups(input) {
+  const tokens = input.split(",").map(t => t.trim()).filter(Boolean);
+  const groups = [];
+  const orPairs = [];
+
+  let currentGroup = [];
+  let multiMode = false;
+  let groupIndex = 0;
+
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
+    if (token === "(") {
+      multiMode = true;
+      currentGroup = [];
+    } else if (token === ")") {
+      multiMode = false;
+      groups.push(currentGroup);
+      currentGroup = [];
+      groupIndex++;
+    } else if (token.toLowerCase() === "or") {
+      orPairs.push([groupIndex - 1, groupIndex]); // 直前と次のグループにOR条件
+    } else {
+      if (multiMode) {
+        currentGroup.push(token);
+      } else {
+        groups.push([token]);
+        groupIndex++;
+      }
+    }
+  }
+
+  return { groups, orPairs };
+}
+
+function matchConditions(tags, groups, orPairs) {
+  const matchedGroups = groups.map(group =>
+    group.every(tag => tags.includes(tag))
+  );
+
+  // ORの条件で、どちらかがtrueなら成立
+  const orResults = orPairs.map(([i, j]) => matchedGroups[i] || matchedGroups[j]);
+
+  // AND条件のグループ（ORに含まれていない）→全てtrueならOK
+  const orGroupIndices = new Set(orPairs.flat());
+  const andResults = matchedGroups
+    .map((matched, idx) => (orGroupIndices.has(idx) ? true : matched));
+
+  return [...orResults, ...andResults].every(v => v);
 }
 
 function renderMonsters(list) {
@@ -52,7 +107,6 @@ function renderMonsters(list) {
     : "<p>該当するモンスターが見つかりませんでした。</p>";
 }
 
-// タグリストの系統名＋タグを表示
 function renderTagList() {
   const tagList = document.getElementById("tag-list");
   tagList.innerHTML = availableTagGroups.map(group => {
@@ -66,12 +120,12 @@ function renderTagList() {
 
 function addTagToInput(tag) {
   const input = document.getElementById("tagInput");
-  const currentTags = input.value.split(",").map(t => t.trim()).filter(Boolean);
-
-  if (!currentTags.includes(tag)) {
-    currentTags.push(tag);
-    input.value = currentTags.join(", ");
+  const currentTags = input.value.trim();
+  if (!currentTags) {
+    input.value = tag;
+    return;
   }
+  input.value = currentTags + ", " + tag;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
