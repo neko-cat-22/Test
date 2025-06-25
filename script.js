@@ -29,13 +29,12 @@ function formatTags(tags) {
 
 function searchByTags() {
   const input = document.getElementById("tagInput").value.trim();
-
   if (!input) {
     renderMonsters(monsters);
     return;
   }
 
-  const conditions = parseConditions(input);
+  const conditions = parseConditionsWithCommas(input);
   const filtered = monsters.filter(monster => {
     const allTags = [
       ...monster.属性.tags,
@@ -50,38 +49,32 @@ function searchByTags() {
   renderMonsters(filtered);
 }
 
-function parseConditions(input) {
-  // 括弧で囲まれた部分をグループとする
-  const orParts = input.split(/\s+or\s+/i);
+// 新しい条件解析関数（カンマ前提）
+function parseConditionsWithCommas(input) {
+  const orParts = input.split(/\s+or\s+/i).map(part => part.trim());
 
-  const groups = orParts.map(part => {
-    const group = [];
-    const match = part.match(/\((.*?)\)/);
-    if (match) {
-      group.push(...match[1].split(",").map(t => t.trim()).filter(Boolean));
+  const orGroups = orParts.map(part => {
+    if (part.startsWith("(") && part.endsWith(")")) {
+      return part.slice(1, -1).split(",").map(t => t.trim()).filter(Boolean);
     } else {
-      group.push(...part.split(",").map(t => t.trim()).filter(Boolean));
+      return [part].flatMap(p => p.split(",").map(t => t.trim()).filter(Boolean));
     }
-    return group;
   });
 
-  // AND条件として共通するタグを抽出
-  const rest = input.split(/\s+or\s+/i).join(",");
-  const restTags = rest.replace(/\([^)]*\)/g, "").split(",").map(t => t.trim()).filter(t => t && t.toLowerCase() !== "or");
+  // AND条件として使われるのは or に含まれていないタグ（再構成で見つける）
+  const orTagsFlat = orGroups.flat();
+  const allTags = input.split(",").map(t => t.replace(/[()]/g, '').trim()).filter(Boolean);
+  const andTags = allTags.filter(t => !orTagsFlat.includes(t) && t.toLowerCase() !== "or");
 
-  return { orGroups: groups, andTags: restTags };
+  return { orGroups, andTags };
 }
 
 function matchConditions(tags, { orGroups, andTags }) {
-  // ORグループがあればどれか1グループが一致していればOK
-  const orValid = orGroups.length === 0 || orGroups.some(group =>
+  const orMatch = orGroups.length === 0 || orGroups.some(group =>
     group.every(tag => tags.includes(tag))
   );
-
-  // ANDタグはすべて含んでいること
-  const andValid = andTags.every(tag => tags.includes(tag));
-
-  return orValid && andValid;
+  const andMatch = andTags.every(tag => tags.includes(tag));
+  return orMatch && andMatch;
 }
 
 function renderMonsters(list) {
