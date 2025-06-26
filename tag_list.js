@@ -1,5 +1,9 @@
 const availableTagGroups = [
   {
+    title: "コマンド",
+    tags: ["(", ")", "or"]
+  },
+  {
     title: "属性",
     tags: ["炎", "水", "木", "光", "闇"]
   },
