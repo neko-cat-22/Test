@@ -1,7 +1,7 @@
 const monsters = [
   {
     name: "夢世界の「掌握者」　メビウス",
-    属性: { text: "炎", tags: ["炎"] },https://test-4dc.pages.dev/
+    属性: { text: "炎", tags: ["炎"] },
     撃種: { text: "貫通", tags: ["貫通"] },
     ショットスキル: {
       text: "触れた味方の友情コンボ威力が30%アップ",
